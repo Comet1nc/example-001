@@ -10,6 +10,8 @@ public class FirebirdScriptRunner
     private readonly string _connectionString;
     private readonly IEnumerable<string> _scriptsPath;
     private readonly Regex _ddlRegex;
+    private static readonly PropertyInfo? CleanTextProp = typeof(FbStatement)
+        .GetProperty("CleanText", BindingFlags.NonPublic | BindingFlags.Instance);
 
     public FirebirdScriptRunner(string connectionString, IEnumerable<string> scriptsPath)
     {
@@ -49,9 +51,7 @@ public class FirebirdScriptRunner
     {
         foreach (var statement in script.Results)
         {
-            PropertyInfo cleanTextProp = typeof(FbStatement).GetProperty("CleanText", 
-                BindingFlags.NonPublic | BindingFlags.Instance);
-            string cleanSql = (string)cleanTextProp.GetValue(statement);
+            string cleanSql = (string)CleanTextProp.GetValue(statement);
             if (string.IsNullOrWhiteSpace(cleanSql) ||  !_ddlRegex.IsMatch(cleanSql))
             {
                 return false;

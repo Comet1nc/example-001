@@ -90,7 +90,6 @@ namespace DbMetaTool
         /// </summary>
         public static void ExportScripts(string connectionString, string outputDirectory)
         {
-            
             var exporter = new DatabaseSchemaExporter(connectionString, outputDirectory);
             exporter.Export();
         }
@@ -100,11 +99,9 @@ namespace DbMetaTool
         /// </summary>
         public static void UpdateDatabase(string connectionString, string scriptsDirectory)
         {
-            // TODO:
-            // 1) Połącz się z bazą danych przy użyciu connectionString.
-            // 2) Wykonaj skrypty z katalogu scriptsDirectory (tylko obsługiwane elementy).
-            // 3) Zadbaj o poprawną kolejność i bezpieczeństwo zmian.
-            throw new NotImplementedException();
+            var scriptsPath = SqlScriptsUtil.GetScriptsPathFromDirectory(scriptsDirectory);
+            var updater = new FirebirdUpdater(connectionString, scriptsPath);
+            updater.ExecuteScripts();
         }
     }
 }
