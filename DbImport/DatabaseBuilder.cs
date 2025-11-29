@@ -27,8 +27,8 @@ public class DatabaseBuilder
             DataSource = "localhost",
             Database = _dbPath,
             UserID = "SYSDBA",
-            Password = "082005",
-            ServerType = FbServerType.Default, // Wymaga zainstalowanego serwera Firebird
+            Password = "masterkey",
+            ServerType = FbServerType.Default,
             Charset = "UTF8",
             Pooling = true
         };
