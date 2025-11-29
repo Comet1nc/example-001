@@ -14,9 +14,9 @@ dotnet run -- update-db --connection-string "<connStr>" --scripts-dir "<ścieżk
 
 
 Aplikacja obsługuje następujące typy DDL:
-Domeny
-Tabele
-Procedury 
+Domeny,
+Tabele,
+Procedury
 
 Do tworzenia nowej bazy użyte są domyślne dane logowania:
 UserID = "SYSDBA",
