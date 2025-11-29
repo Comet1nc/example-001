@@ -90,11 +90,9 @@ namespace DbMetaTool
         /// </summary>
         public static void ExportScripts(string connectionString, string outputDirectory)
         {
-            // TODO:
-            // 1) Połącz się z bazą danych przy użyciu connectionString.
-            // 2) Pobierz metadane domen, tabel (z kolumnami) i procedur.
-            // 3) Wygeneruj pliki .sql / .json / .txt w outputDirectory.
-            throw new NotImplementedException();
+            
+            var exporter = new DatabaseSchemaExporter(connectionString, outputDirectory);
+            exporter.Export();
         }
 
         /// <summary>
