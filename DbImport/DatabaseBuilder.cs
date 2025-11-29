@@ -10,7 +10,7 @@ public class DatabaseBuilder
     public DatabaseBuilder(string databaseDirectory, string scriptsDirectory)
     {
         _dbPath = Path.Combine(databaseDirectory, "database.fdb");
-        _scriptsPath = GetScriptsPathFromDirectory(scriptsDirectory);
+        _scriptsPath = SqlScriptsUtil.GetScriptsPathFromDirectory(scriptsDirectory);
     }
     
     public void BuildDatabase()
@@ -37,19 +37,5 @@ public class DatabaseBuilder
         Console.WriteLine($"Utworzono nową bazę danych: {_dbPath}");
 
         return csb.ToString();
-    }
-
-    private IEnumerable<string> GetScriptsPathFromDirectory(string directory)
-    {
-        var files = Directory.GetFiles(directory, "*.sql")
-            .OrderBy(f => f)
-            .ToList();
-
-        if (files.Count == 0)
-        {
-            throw new FileNotFoundException("Brak skryptów .sql do wykonania.");
-        }
-
-        return files;
     }
 }
